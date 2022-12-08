@@ -1,10 +1,11 @@
-import { Section } from 'components/Section/Section';
-import { Phonebook } from 'components/Phonebook/Phonebook';
-import { ContactList } from 'components/Contacts/ContactList';
-import { Filter } from 'components/Filter/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchAll } from 'redux/contacts/operations/fetchAll';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from 'pages/Home';
+import { Contacts } from 'pages/Contacts';
+import { Register } from 'pages/Register';
+import { Login } from 'pages/Login';
 
 export function App() {
   const error = useSelector(state => state.contacts.error);
@@ -19,14 +20,12 @@ export function App() {
   }, [error]);
 
   return (
-    <div>
-      <Section title="Phonebook">
-        <Phonebook />
-      </Section>
-      <Section title="Contacts">
-        <Filter />
-        <ContactList />
-      </Section>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />}>
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Route>
+    </Routes>
   );
 }
