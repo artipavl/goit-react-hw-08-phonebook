@@ -27,7 +27,7 @@ export const Login = () => {
   };
   
   return (
-    <Section title="Register">
+    <Section title="Login">
       <form onSubmit={e => submitForm(e)}>
         <input
           type="email"
