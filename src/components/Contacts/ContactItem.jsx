@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations/deleteContact';
 
 export const ContactItem = ({ contact }) => {
-  const { name, phone, id } = contact;
+  const { name, number, id } = contact;
 
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export const ContactItem = ({ contact }) => {
 
   return (
     <li className={css.item}>
-      {name}: {phone}
+      {name}: {number}
       <button
         type="button"
         onClick={e => onButtonClick(e, id)}
@@ -39,7 +39,7 @@ export const ContactItem = ({ contact }) => {
 ContactItem.propTypes = {
   contact: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
 };
