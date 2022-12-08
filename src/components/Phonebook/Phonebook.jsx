@@ -38,7 +38,7 @@ export function Phonebook() {
       }
     }
     try { 
-      await dispatch(addContact({ name, phone: number }));
+      await dispatch(addContact({ name, number }));
       submitButton.disabled = false;
     } catch (error) {
       console.log(error);
