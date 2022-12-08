@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.value);
   const filter = useSelector(state => state.filter.value);
-
+  console.log(contacts);
   const contactsFil = useMemo(
     () =>
       filter
@@ -19,10 +19,14 @@ export const ContactList = () => {
   );
 
   return (
-    <ul className={css.list}>
-      {contactsFil.map(contact => (
-        <ContactItem key={contact.id} contact={contact} />
-      ))}
-    </ul>
+    <>
+      {contactsFil && (
+        <ul className={css.list}>
+          {contactsFil.map(contact => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
