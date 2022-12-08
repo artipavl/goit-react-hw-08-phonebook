@@ -23,6 +23,7 @@ const contactsSlice = createSlice({
     [fetchAll.rejected](state, action) {
       state.isLoading = false;
       state.error = action.payload;
+      // state.value = [];
     },
 
     [deleteContact.pending](state) {
