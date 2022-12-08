@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchAll } from 'redux/contacts/operations/fetchAll';
+// import { fetchAll } from 'redux/contacts/operations/fetchAll';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'pages/Home';
 import { Contacts } from 'pages/Contacts';
@@ -9,11 +9,6 @@ import { Login } from 'pages/Login';
 
 export function App() {
   const error = useSelector(state => state.contacts.error);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAll());
-  }, [dispatch]);
 
   useEffect(() => {
     error && alert(error);
