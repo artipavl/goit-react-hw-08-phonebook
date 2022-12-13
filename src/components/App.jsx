@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-// import { fetchAll } from 'redux/contacts/operations/fetchAll';
 import { Route, Routes } from 'react-router-dom';
 import { setAuthHeader } from 'API/API';
 import { authCurrent } from '../redux/auth/operations/authCurrent';
