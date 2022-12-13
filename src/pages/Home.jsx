@@ -1,39 +1,12 @@
-import { Suspense } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Outlet } from 'react-router-dom';
-import { authLogout } from 'redux/auth/operations/authLogout';
-
 export const Home = () => {
-  const email = useSelector(s => s.auth.user.email);
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  
-  const dispatch = useDispatch();
-
-  const onLogout = () => {
-    dispatch(authLogout());
-  };
-  return (
-    <>
-      <header>
-        <nav>
-          <NavLink to="/contacts">contacts</NavLink>
-          <br />
-          <NavLink to="/register">register</NavLink>
-          <br />
-          <NavLink to="/login">login</NavLink>
-        </nav>
-        {isLoggedIn && (
-          <div>
-            <p>{email}</p>
-            <button type="button" onClick={() => onLogout()}>
-              Logout
-            </button>
-          </div>
-        )}
-      </header>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
-    </>
-  );
-};
+    return (
+      <div>
+        <h1>
+          Task manager welcome page{' '}
+          <span role="img" aria-label="Greeting icon">
+            💁‍♀️
+          </span>
+        </h1>
+      </div>
+    );
+}

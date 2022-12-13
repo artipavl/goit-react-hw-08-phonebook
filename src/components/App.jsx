@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { setAuthHeader } from 'API/API';
 import { authCurrent } from '../redux/auth/operations/authCurrent';
-import { Home } from 'pages/Home';
+import { Layout } from 'components/Layout';
 import { Contacts } from 'pages/Contacts';
 import { Register } from 'pages/Register';
 import { Login } from 'pages/Login';
+import { Home } from 'pages/Home';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export function App() {
   const [current, setCurrent] = useState(false);
@@ -30,10 +33,26 @@ export function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />}>
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+          }
+        />
       </Route>
     </Routes>
   );
