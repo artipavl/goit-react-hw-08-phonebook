@@ -14,23 +14,33 @@ export const Layout = () => {
   };
   return (
     <>
-      <header>
-        <nav>
-          <NavLink to="/contacts">contacts</NavLink>
-          <br />
-          <NavLink to="/register">register</NavLink>
-          <br />
-          <NavLink to="/login">login</NavLink>
-        </nav>
-        {isLoggedIn && (
+      {!isLoggedIn && (
+        <header>
+          <nav>
+            <NavLink to="/">Home</NavLink>
+            <br />
+            <NavLink to="/register">Register</NavLink>
+            <br />
+            <NavLink to="/login">Login</NavLink>
+          </nav>
+        </header>
+      )}
+      {isLoggedIn && (
+        <header>
+          <nav>
+            <NavLink to="/">Home</NavLink>
+            <br />
+            <NavLink to="/contacts">Contacts</NavLink>
+            <br />
+          </nav>
           <div>
             <p>{email}</p>
             <button type="button" onClick={() => onLogout()}>
               Logout
             </button>
           </div>
-        )}
-      </header>
+        </header>
+      )}
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
