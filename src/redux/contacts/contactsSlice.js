@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchAll } from './operations/fetchAll';
 import { deleteContact } from './operations/deleteContact';
 import { addContact } from './operations/addContact';
+import { authLogout } from 'redux/auth/operations/authLogout';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -50,6 +51,17 @@ const contactsSlice = createSlice({
       state.value.push(action.payload);
     },
     [addContact.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    // [authLogout.pending](state) {
+
+    // },
+    [authLogout.fulfilled](state, action) {
+      state.value = [];
+    },
+    [authLogout.rejected](state, action) {
       state.isLoading = false;
       state.error = action.payload;
     },
