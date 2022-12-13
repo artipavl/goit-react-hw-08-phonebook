@@ -24,6 +24,11 @@ export const postLogout = async () => {
   return response;
 };
 
+export const getCurrent = async () => {
+  const response = await axios.get('/users/current');
+  return response;
+};
+
 
 
 export const getContacts = async () => {
