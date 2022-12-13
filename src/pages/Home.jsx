@@ -5,10 +5,13 @@ import { authLogout } from 'redux/auth/operations/authLogout';
 
 export const Home = () => {
   const email = useSelector(s => s.auth.user.email);
-    const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  
+  const dispatch = useDispatch();
+
   const onLogout = () => {
     dispatch(authLogout());
-  }
+  };
   return (
     <>
       <header>
@@ -19,12 +22,14 @@ export const Home = () => {
           <br />
           <NavLink to="/login">login</NavLink>
         </nav>
-        <div>
-          <p>{email}</p>
-          <button type="button" onClick={()=>onLogout()}>
-            Logout
-          </button>
-        </div>
+        {isLoggedIn && (
+          <div>
+            <p>{email}</p>
+            <button type="button" onClick={() => onLogout()}>
+              Logout
+            </button>
+          </div>
+        )}
       </header>
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
