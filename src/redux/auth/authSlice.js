@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
 import { authLogin } from './operations/authLogin';
 import { authLogout } from './operations/authLogout';
 import { authSignup } from './operations/authSignup';
+import { authCurrent } from './operations/authCurrent';
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -55,7 +59,30 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.error = action.payload;
     },
+
+    // [authCurrent.pending](state) {
+    //   state.isRefreshing = true;
+    // },
+    [authCurrent.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+    },
+    [authCurrent.rejected](state, action) {
+      // state.isRefreshing = false;
+      state.isLoggedIn = true;
+      state.error = action.payload;
+    },
   },
 });
 
-export const authReducer = authSlice.reducer;
+
+const persistConfig = {
+  key: 'contacts',
+  storage,
+  whitelist: ['token'],
+};
+
+export const authReducer = persistReducer(persistConfig, authSlice.reducer);
+
+
+// export const authReducer = authSlice.reducer;
