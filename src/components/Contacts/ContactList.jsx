@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.value);
   const filter = useSelector(state => state.filter.value);
-  console.log(contacts);
+  
   const contactsFil = useMemo(
     () =>
       filter
@@ -17,7 +17,7 @@ export const ContactList = () => {
         : contacts,
     [contacts, filter]
   );
-
+  console.log(contactsFil);
   return (
     <>
       {contactsFil && (
