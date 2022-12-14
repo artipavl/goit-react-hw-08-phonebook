@@ -1,5 +1,5 @@
+import { Button, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import css from 'components/Phonebook/Phonebook.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/operations/addContact';
 
@@ -37,7 +37,7 @@ export function Phonebook() {
         return;
       }
     }
-    try { 
+    try {
       await dispatch(addContact({ name, number }));
       submitButton.disabled = false;
     } catch (error) {
@@ -66,35 +66,44 @@ export function Phonebook() {
   };
 
   return (
-    <form onSubmit={submitForm} className={css.phonebookForm}>
-      <label>
-        <span className={css.phonebookLableTitle}>Name</span>
-        <input
-          value={name}
-          onChange={changeForm}
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </label>
-
-      <label>
-        <span className={css.phonebookLableTitle}>Number</span>
-        <input
-          value={number}
-          onChange={changeForm}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-      </label>
-      <button type="submit" name="submitButton" className={css.phonebookButton}>
-        add contacts
-      </button>
+    <form onSubmit={submitForm}>
+      <Flex
+        minWidth="max-content"
+        alignItems="center"
+        justifyContent="center"
+        gap={2}
+        flexDirection="column"
+      >
+        <FormControl w="inherit">
+          <FormLabel>Name</FormLabel>
+          <Input
+            w={[null, 200, 300, 400]}
+            value={name}
+            onChange={changeForm}
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          />
+        </FormControl>
+        <FormControl w="inherit">
+          <FormLabel>Number</FormLabel>
+          <Input
+            w={[null, 200, 300, 400]}
+            value={number}
+            onChange={changeForm}
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+        </FormControl>
+        <Button type="submit" name="submitButton">
+          add contacts
+        </Button>
+      </Flex>
     </form>
   );
 }

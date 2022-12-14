@@ -1,5 +1,4 @@
-import css from 'components/Contacts/ContactList.module.css';
-
+import { Flex, List } from '@chakra-ui/react';
 import { ContactItem } from 'components/Contacts/ContactItem';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,7 +6,7 @@ import { useSelector } from 'react-redux';
 export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.value);
   const filter = useSelector(state => state.filter.value);
-  
+
   const contactsFil = useMemo(
     () =>
       filter
@@ -19,14 +18,22 @@ export const ContactList = () => {
   );
   console.log(contactsFil);
   return (
-    <>
+    <Flex
+      minWidth="max-content"
+      // alignItems="center"
+      // justifyContent="center"
+
+      gap={2}
+      flexDirection="column"
+      
+    >
       {contactsFil && (
-        <ul className={css.list}>
+        <List spacing={4}>
           {contactsFil.map(contact => (
             <ContactItem key={contact.id} contact={contact} />
           ))}
-        </ul>
+        </List>
       )}
-    </>
+    </Flex>
   );
 };

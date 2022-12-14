@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://artipavl.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.13",
     "@chakra-ui/react": "^2.4.3",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -13,6 +14,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
+    "formik": "^2.2.9",
     "framer-motion": "^7.8.0",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",

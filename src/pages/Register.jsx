@@ -1,3 +1,4 @@
+import { Button, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { Section } from 'components/Section/Section';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -12,6 +13,9 @@ export const Register = () => {
 
   const submitForm = async e => {
     e.preventDefault();
+    if (!name || !email || !password) {
+      return;
+    }
     const submitButton = e.currentTarget.elements.submitButton;
     submitButton.disabled = true;
 
@@ -30,32 +34,52 @@ export const Register = () => {
 
   return (
     <Section title="Register">
-      <form onSubmit={(e) => submitForm(e)}>
-        <input
-          type="text"
-          name="name"
-          id=""
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <br />
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <br />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <br />
-        <button type="submit" name="submitButton">
-          submit
-        </button>
+      <form onSubmit={e => submitForm(e)}>
+        <Flex
+          minWidth="max-content"
+          alignItems="center"
+          justifyContent="center"
+          gap={2}
+          flexDirection="column"
+        >
+          <FormControl w="inherit">
+            <FormLabel>Name</FormLabel>
+            <Input
+              w={[null, 200, 300, 400]}
+              placeholder="name"
+              type="text"
+              name="name"
+              id=""
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </FormControl>
+          <FormControl w="inherit">
+            <FormLabel>Email address</FormLabel>
+            <Input
+              w={[null, 200, 300, 400]}
+              placeholder="email"
+              type="email"
+              name="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl w="inherit">
+            <FormLabel>Password</FormLabel>
+            <Input
+              w={[null, 200, 300, 400]}
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </FormControl>
+          <Button type="submit" name="submitButton">
+            Register
+          </Button>
+        </Flex>
       </form>
     </Section>
   );
