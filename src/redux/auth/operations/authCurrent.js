@@ -6,6 +6,6 @@ export const authCurrent = createAsyncThunk('auth/current', async (_, thunkAPI) 
     const response = await getCurrent();
     return response.data;
   } catch (error) {
-    thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });

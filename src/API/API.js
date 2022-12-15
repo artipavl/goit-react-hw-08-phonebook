@@ -15,8 +15,8 @@ export const postSignup = async article => {
 };
 
 export const postLogin = async article => {
-  const response = await axios.post('/users/login', article);
-  return response;
+    const response = await axios.post('/users/login', article);
+    return response;
 };
 
 export const postLogout = async () => {

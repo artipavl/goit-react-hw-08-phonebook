@@ -10,14 +10,16 @@ import { Login } from 'pages/Login';
 import { Home } from 'pages/Home';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { useToast } from '@chakra-ui/react';
 
 export function App() {
   const [current, setCurrent] = useState(false);
-  const error = useSelector(state => state.contacts.error);
+  const error = useSelector(state => state.auth.error);
   const token = useSelector(state => state.auth.token);
   const isRefreshing = useSelector(state => state.auth.isRefreshing);
 
   const dispatch = useDispatch();
+   const toast = useToast();
 
   useEffect(() => {
     if (!current && token) {
@@ -28,8 +30,16 @@ export function App() {
   }, [dispatch, current, token]);
 
   useEffect(() => {
-    error && alert(error.message);
-  }, [error]);
+    error &&
+      toast({
+        title: 'Error',
+        description: error,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+  }, [error, toast]);
 
   return (
     <>

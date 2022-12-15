@@ -9,7 +9,7 @@ export const authLogout = createAsyncThunk(
       clearAuthHeader();
       return response.data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

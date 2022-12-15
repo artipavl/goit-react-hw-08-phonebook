@@ -63,12 +63,8 @@ const authSlice = createSlice({
       state.isRefreshing = true;
     },
     [authCurrent.fulfilled](state, action) {
-      if (!action.payload) {
-        state.token = null;
-      } else {
-        state.user = action.payload;
-        state.isLoggedIn = true;
-      }
+      state.user = action.payload;
+      state.isLoggedIn = true;
       state.isRefreshing = false;
     },
     [authCurrent.rejected](state, action) {
