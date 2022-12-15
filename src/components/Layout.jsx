@@ -46,7 +46,7 @@ export const Layout = () => {
               top="0"
               display="flex"
               gap={['16px', '0']}
-              bg={colorMode === 'light' ? 'white' : 'gray.800'}
+              bg={[colorMode === 'light' ? 'white' : 'gray.800', 'inherit']}
               flexDirection={['column', 'unset']}
               justifyContent={['start', 'space-between']}
               py={2}
