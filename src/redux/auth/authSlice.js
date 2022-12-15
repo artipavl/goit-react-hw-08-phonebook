@@ -6,7 +6,6 @@ import { authLogout } from './operations/authLogout';
 import { authSignup } from './operations/authSignup';
 import { authCurrent } from './operations/authCurrent';
 
-
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -60,21 +59,26 @@ const authSlice = createSlice({
       state.error = action.payload;
     },
 
-    // [authCurrent.pending](state) {
-    //   state.isRefreshing = true;
-    // },
+    [authCurrent.pending](state) {
+      state.isRefreshing = true;
+    },
     [authCurrent.fulfilled](state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
+      if (!action.payload) {
+        state.token = null;
+      } else {
+        state.user = action.payload;
+        state.isLoggedIn = true;
+      }
+      state.isRefreshing = false;
     },
     [authCurrent.rejected](state, action) {
-      // state.isRefreshing = false;
+      state.isRefreshing = false;
+      state.token = null;
       state.isLoggedIn = true;
       state.error = action.payload;
     },
   },
 });
-
 
 const persistConfig = {
   key: 'contacts',
@@ -83,6 +87,5 @@ const persistConfig = {
 };
 
 export const authReducer = persistReducer(persistConfig, authSlice.reducer);
-
 
 // export const authReducer = authSlice.reducer;
