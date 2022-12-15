@@ -6,7 +6,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { authLogout } from 'redux/auth/operations/authLogout';
 import { Section } from './Section/Section';
 
-export const Layout = () => {
+const Layout = () => {
   const [openNav, setOpenNav] = useState(false);
   const email = useSelector(s => s.auth.user.email);
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
@@ -244,3 +244,5 @@ export const Layout = () => {
     </>
   );
 };
+
+export default Layout;

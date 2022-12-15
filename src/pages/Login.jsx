@@ -70,3 +70,5 @@ export const Login = () => {
     </Section>
   );
 };
+
+export default Login;

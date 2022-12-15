@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authSignup } from 'redux/auth/operations/authSignup';
 
-export const Register = () => {
+const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ export const Register = () => {
     const submitButton = e.currentTarget.elements.submitButton;
     submitButton.disabled = true;
 
-      try {
+    try {
       await dispatch(authSignup({ name, email, password }));
       submitButton.disabled = false;
     } catch (error) {
@@ -85,3 +85,5 @@ export const Register = () => {
     </Section>
   );
 };
+
+export default Register;

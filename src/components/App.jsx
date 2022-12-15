@@ -1,16 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { setAuthHeader } from 'API/API';
 import { authCurrent } from '../redux/auth/operations/authCurrent';
-import { Layout } from 'components/Layout';
-import { Contacts } from 'pages/Contacts';
-import { Register } from 'pages/Register';
-import { Login } from 'pages/Login';
-import { Home } from 'pages/Home';
+import { useToast } from '@chakra-ui/react';
+
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
-import { useToast } from '@chakra-ui/react';
+import { setAuthHeader } from 'API/API';
+
+import Layout from 'components/Layout';
+const Home = lazy(() => import('pages/Home'));
+const Login = lazy(() => import('pages/Login'));
+const Register = lazy(() => import('pages/Register'));
+const Contacts = lazy(() => import('pages/Contacts'));
 
 export function App() {
   const [current, setCurrent] = useState(false);
@@ -19,7 +21,7 @@ export function App() {
   const isRefreshing = useSelector(state => state.auth.isRefreshing);
 
   const dispatch = useDispatch();
-   const toast = useToast();
+  const toast = useToast();
 
   useEffect(() => {
     if (!current && token) {

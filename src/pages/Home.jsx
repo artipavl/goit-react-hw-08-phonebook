@@ -1,14 +1,14 @@
-import { Section } from "components/Section/Section";
+import { Heading } from '@chakra-ui/react';
+import { Section } from 'components/Section/Section';
 
-export const Home = () => {
-    return (
-      <Section>
-        <h1>
-          Task manager welcome page{' '}
-          <span role="img" aria-label="Greeting icon">
-            💁‍♀️
-          </span>
-        </h1>
-      </Section>
-    );
-}
+const Home = () => {
+  return (
+    <Section>
+      <Heading as="h1" textAlign={'center'}>
+        Hello, this project was carried out as part of the "React" practice.
+      </Heading>
+    </Section>
+  );
+};
+
+export default Home;
