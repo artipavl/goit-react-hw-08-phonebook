@@ -17,6 +17,7 @@ const Contacts = lazy(() => import('pages/Contacts'));
 export function App() {
   const [current, setCurrent] = useState(false);
   const error = useSelector(state => state.auth.error);
+  const name = useSelector(state => state.auth.user.name);
   const token = useSelector(state => state.auth.token);
   const isRefreshing = useSelector(state => state.auth.isRefreshing);
 
@@ -42,6 +43,18 @@ export function App() {
         position: 'top-right',
       });
   }, [error, toast]);
+
+  useEffect(() => {
+    name &&
+      toast({
+        title: 'Authorization successful',
+        description: `Hello ${name}`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      });
+  }, [name, toast]);
 
   return (
     <>
