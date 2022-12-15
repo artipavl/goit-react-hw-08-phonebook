@@ -71,7 +71,7 @@ export function Phonebook() {
         minWidth="max-content"
         alignItems="center"
         justifyContent="center"
-        gap={2}
+        gap={6}
         flexDirection="column"
       >
         <FormControl w="inherit">
