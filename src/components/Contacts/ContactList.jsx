@@ -16,7 +16,6 @@ export const ContactList = () => {
         : contacts,
     [contacts, filter]
   );
-  console.log(contactsFil);
   return (
     <Flex
       minWidth="max-content"
