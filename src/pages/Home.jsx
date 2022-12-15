@@ -1,12 +1,14 @@
+import { Section } from "components/Section/Section";
+
 export const Home = () => {
     return (
-      <div>
+      <Section>
         <h1>
           Task manager welcome page{' '}
           <span role="img" aria-label="Greeting icon">
             💁‍♀️
           </span>
         </h1>
-      </div>
+      </Section>
     );
 }

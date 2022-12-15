@@ -31,7 +31,7 @@ export const Login = () => {
   };
 
   return (
-    <Section title="Login" paddingTop={4}>
+    <Section title="Login">
       <form onSubmit={e => submitForm(e)}>
         <Flex
           minWidth="max-content"

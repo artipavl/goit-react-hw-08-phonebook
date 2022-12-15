@@ -31,10 +31,10 @@ export const ContactItem = ({ contact }) => {
         gap={4}
       >
         <Box display="flex" alignItems="center">
-          <Text as="span" maxWidth={['100px', '300px', '400px']} noOfLines={1}>
+          <Text as="span" maxWidth={['70px', '300px', '400px']} noOfLines={1}>
             {name}
           </Text>
-          <Text as="span" maxWidth={['100px', '300px', '400px']} noOfLines={1}>
+          <Text as="span" maxWidth={['140px', '300px', '400px']} noOfLines={1}>
             : {number}
           </Text>
         </Box>
