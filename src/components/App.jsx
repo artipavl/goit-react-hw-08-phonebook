@@ -15,6 +15,7 @@ export function App() {
   const [current, setCurrent] = useState(false);
   const error = useSelector(state => state.contacts.error);
   const token = useSelector(state => state.auth.token);
+  const isRefreshing = useSelector(state => state.auth.isRefreshing);
 
   const dispatch = useDispatch();
 
@@ -31,28 +32,35 @@ export function App() {
   }, [error]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Contacts />} />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
-        />
-      </Route>
-    </Routes>
+    <>
+      {!isRefreshing && (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute redirectTo="/login" component={<Contacts />} />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<Register />}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+              }
+            />
+          </Route>
+        </Routes>
+      )}
+    </>
   );
 }
