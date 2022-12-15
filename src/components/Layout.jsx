@@ -5,15 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Outlet } from 'react-router-dom';
 import { authLogout } from 'redux/auth/operations/authLogout';
 import { Section } from './Section/Section';
-import { useTheme } from '@emotion/react';
 
 export const Layout = () => {
   const [openNav, setOpenNav] = useState(false);
   const email = useSelector(s => s.auth.user.email);
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const { colorMode, toggleColorMode } = useColorMode();
-  const theme = useTheme();
-  console.log(theme);
   const dispatch = useDispatch();
 
   const onLogout = () => {
@@ -70,28 +67,28 @@ export const Layout = () => {
                 gap={4}
               >
                 <Box>
-                  <NavLink to="/">
+                  <NavLink onClick={() => setOpenNav(!openNav)} to="/">
                     <Text p={2} display="block" h="100%" textAlign="center">
                       Home
                     </Text>
                   </NavLink>
                 </Box>
                 {/* <Box>
-                <NavLink to="/contacts">
+                <NavLink onClick={() => setOpenNav(!openNav)} to="/contacts">
                   <Text p={2} display="block" h="100%" textAlign="center">
                     Contacts
                   </Text>
                 </NavLink>
               </Box> */}
                 <Box>
-                  <NavLink to="/register">
+                  <NavLink onClick={() => setOpenNav(!openNav)} to="/register">
                     <Text p={2} display="block" h="100%" textAlign="center">
                       Register
                     </Text>
                   </NavLink>
                 </Box>
                 <Box>
-                  <NavLink to="/login">
+                  <NavLink onClick={() => setOpenNav(!openNav)} to="/login">
                     <Text p={2} display="block" h="100%" textAlign="center">
                       Login
                     </Text>
@@ -178,28 +175,28 @@ export const Layout = () => {
                 gap={4}
               >
                 <Box>
-                  <NavLink to="/">
+                  <NavLink onClick={() => setOpenNav(!openNav)} to="/">
                     <Text p={2} display="block" h="100%" textAlign="center">
                       Home
                     </Text>
                   </NavLink>
                 </Box>
                 <Box>
-                  <NavLink to="/contacts">
+                  <NavLink onClick={() => setOpenNav(!openNav)} to="/contacts">
                     <Text p={2} display="block" h="100%" textAlign="center">
                       Contacts
                     </Text>
                   </NavLink>
                 </Box>
                 {/* <Box>
-                <NavLink to="/register">
+                <NavLink onClick={() => setOpenNav(!openNav)} to="/register">
                   <Text p={2} display="block" h="100%" textAlign="center">
                     Register
                   </Text>
                 </NavLink>
               </Box>
               <Box>
-                <NavLink to="/login">
+                <NavLink onClick={() => setOpenNav(!openNav)} to="/login">
                   <Text p={2} display="block" h="100%" textAlign="center">
                     Login
                   </Text>
