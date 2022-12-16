@@ -1,72 +1,102 @@
-import { Button, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { Section } from 'components/Section/Section';
-// import { ErrorMessage, Field, Formik } from "formik";
-import { useState } from 'react';
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { authLogin } from 'redux/auth/operations/authLogin';
 
-export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import { Field, Form, Formik } from 'formik';
+import * as yup from 'yup';
 
+import { Section } from 'components/Section/Section';
+
+let schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+});
+
+const initialValues = {
+  email: '',
+  password: '',
+};
+
+export const Login = () => {
   const dispatch = useDispatch();
 
-  const submitForm = async e => {
-    e.preventDefault();
-    if (!email || !password) {
-      return;
-    }
-    const submitButton = e.currentTarget.elements.submitButton;
-    submitButton.disabled = true;
+  const onSubmit = async (values, actions) => {
     try {
-      await dispatch(authLogin({ email, password }));
-      submitButton.disabled = false;
+      await dispatch(authLogin(values));
     } catch (error) {
-      console.log(error);
-      submitButton.disabled = false;
+      actions.setSubmitting(false);
     }
-
-    setEmail('');
-    setPassword('');
+    actions.resetForm();
   };
-
   return (
     <Section title="Login">
-      <form onSubmit={e => submitForm(e)}>
-        <Flex
-          minWidth="max-content"
-          alignItems="center"
-          justifyContent="center"
-          gap={6}
-          flexDirection="column"
-        >
-          <FormControl w="inherit">
-            <FormLabel>Email address</FormLabel>
-            <Input
-              w={[null, 200, 300, 400]}
-              placeholder="email"
-              type="email"
-              name="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </FormControl>
-          <FormControl w="inherit">
-            <FormLabel>Password</FormLabel>
-            <Input
-              w={[null, 200, 300, 400]}
-              placeholder="password"
-              type="password"
-              name="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </FormControl>
-          <Button type="submit" name="submitButton">
-            Login
-          </Button>
-        </Flex>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={schema}
+      >
+        {props => (
+          <Form>
+            <Flex
+              minWidth="max-content"
+              alignItems="center"
+              justifyContent="center"
+              gap={6}
+              flexDirection="column"
+            >
+              <Field name="email">
+                {({ field, form }) => (
+                  <FormControl
+                    w="inherit"
+                    isInvalid={form.errors.email && form.touched.email}
+                  >
+                    <FormLabel>Email address</FormLabel>
+                    <Input
+                      w={[null, 200, 300, 400]}
+                      placeholder="email"
+                      type={'email'}
+                      {...field}
+                    />
+                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+              <Field name="password">
+                {({ field, form }) => (
+                  <FormControl
+                    w="inherit"
+                    isInvalid={form.errors.password && form.touched.password}
+                  >
+                    <FormLabel>Password</FormLabel>
+                    <Input
+                      w={[null, 200, 300, 400]}
+                      placeholder="password"
+                      type={'password'}
+                      {...field}
+                    />
+                    <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+
+              <Button
+                type="submit"
+                isLoading={props.isSubmitting}
+              >
+                Login
+              </Button>
+            </Flex>
+          </Form>
+        )}
+      </Formik>
     </Section>
   );
 };
