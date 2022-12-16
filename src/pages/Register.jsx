@@ -38,7 +38,7 @@ export const Register = () => {
     }
   };
   return (
-    <Section title="Login">
+    <Section title="Register">
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
