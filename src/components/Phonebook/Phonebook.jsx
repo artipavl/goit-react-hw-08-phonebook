@@ -146,7 +146,7 @@ export const Phonebook = () => {
               </Field>
 
               <Button type="submit" isLoading={props.isSubmitting}>
-                add contacts
+                add contact
               </Button>
             </Flex>
           </Form>
