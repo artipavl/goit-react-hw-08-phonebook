@@ -1,4 +1,12 @@
-import { IconButton, useColorMode, Box, Button, Text, Center, Spinner } from '@chakra-ui/react';
+import {
+  IconButton,
+  useColorMode,
+  Box,
+  Button,
+  Text,
+  Center,
+  Spinner,
+} from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Suspense, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,8 +21,12 @@ const Layout = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const dispatch = useDispatch();
 
-  const onLogout = () => {
-    dispatch(authLogout());
+  const onLogout = async () => {
+    try {
+      await dispatch(authLogout());
+      setOpenNav(!openNav);
+    } catch (error) {}
+
   };
 
   const opas = openNav ? 1 : 0;
