@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Field, Form, Formik} from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 
 import { addContact } from 'redux/contacts/operations/addContact';
@@ -26,30 +26,29 @@ let schema = yup.object().shape({
   number: yup.string().required(),
 });
 
-
 export const Phonebook = () => {
   const contacts = useSelector(state => state.contacts.value);
   const dispatch = useDispatch();
   const toast = useToast();
 
-    const [name, setName] = useState(() =>
-      JSON.parse(window.localStorage.getItem('name'))
-        ? JSON.parse(window.localStorage.getItem('name'))
-        : ''
-    );
-    const [number, setNumber] = useState(() =>
-      JSON.parse(window.localStorage.getItem('number'))
-        ? JSON.parse(window.localStorage.getItem('number'))
-        : ''
-    );
+  const [name, setName] = useState(() =>
+    JSON.parse(window.localStorage.getItem('name'))
+      ? JSON.parse(window.localStorage.getItem('name'))
+      : ''
+  );
+  const [number, setNumber] = useState(() =>
+    JSON.parse(window.localStorage.getItem('number'))
+      ? JSON.parse(window.localStorage.getItem('number'))
+      : ''
+  );
 
-    useEffect(() => {
-      window.localStorage.setItem('name', JSON.stringify(name));
-    }, [name]);
+  useEffect(() => {
+    window.localStorage.setItem('name', JSON.stringify(name));
+  }, [name]);
 
-    useEffect(() => {
-      window.localStorage.setItem('number', JSON.stringify(number));
-    }, [number]);
+  useEffect(() => {
+    window.localStorage.setItem('number', JSON.stringify(number));
+  }, [number]);
 
   const changeForm = e => {
     const name = e.target.name;
@@ -94,7 +93,7 @@ export const Phonebook = () => {
   return (
     <>
       <Formik
-        initialValues={{name,number}}
+        initialValues={{ name, number }}
         onSubmit={onSubmit}
         validationSchema={schema}
       >
