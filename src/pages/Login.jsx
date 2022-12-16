@@ -30,10 +30,10 @@ export const Login = () => {
   const onSubmit = async (values, actions) => {
     try {
       await dispatch(authLogin(values));
+      actions.resetForm();
     } catch (error) {
       actions.setSubmitting(false);
     }
-    actions.resetForm();
   };
   return (
     <Section title="Login">
